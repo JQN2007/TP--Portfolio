@@ -1,0 +1,153 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Henny+Penny&family=My+Soul&family=Oswald:wght@200..700&family=Pacifico&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&display=swap" rel="stylesheet">
+
+    <title>PortFolio</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+    <div class="bloque-negro">
+      <h1 class="nombre">Joaquin</h1>
+    </div>
+
+    <div class="card">
+      <img src="logo imagen.jpg" alt="Foto perfil"> <!-- tu foto -->
+    </div>
+
+    <div class="bloque-negro">
+      <h1 class="apellido">Jara</h1>
+      <div class="btn-cont">
+  <button class="button">
+    <svg
+      class="settings-btn"
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 -960 960 960"
+      width="24"
+      fill="#e8eaed"
+    >
+      <path
+        d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 ```html
+99t99.5 41Zm-2-140Z"
+      ></path>
+    </svg>
+    <span class="tooltip">Cambiar cuenta</span>
+  </button>  
+  
+</div>
+
+    </div>
+  </header>
+<!-- Modal Cambiar Cuenta -->
+<div id="modalCambiarCuenta" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Cambiar cuenta</h2>
+    <form>
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+
+      <button type="submit" class="btn-modal">Cambiar</button>
+    </form>
+  </div>
+</div>
+
+
+<section class="sobre-mi">
+  <h2>SOBRE MI</h2>
+</section>
+
+<section class="sobre-mi-texto">
+  <div class="sobre-mi-item">
+    <h3>💻 Desarrollador Web</h3>
+    <p>
+      Soy un <span>desarrollador web</span> con experiencia en crear sitios y aplicaciones interactivas.
+    </p>
+  </div>
+
+  <div class="sobre-mi-item">
+    <h3>🚀 Apasionado por aprender</h3>
+    <p>
+      Me encanta <span>aprender nuevas tecnologías</span> y mejorar mis habilidades día a día.
+    </p>
+  </div>
+
+  <div class="sobre-mi-item">
+    <h3>🎨 Creatividad y resolución</h3>
+    <p>
+      Disfruto trabajar en <span>proyectos desafiantes</span> que ponen a prueba mi creatividad y mi capacidad de resolver problemas.
+    </p>
+  </div>
+
+  <div class="sobre-mi-item">
+    <h3>🌎 Mi objetivo</h3>
+    <p>
+      Crecer como profesional y formar parte de <span>grandes proyectos</span> que me permitan aportar valor e innovar.
+    </p>
+  </div>
+</section>
+
+<section class="sobre-mi">
+  <h2>MIS PROYECTOS</h2>
+</section>
+
+<div class="galeria">
+  <div class="galeria-conteiner">
+    <img class="galeria-item galeria-item-1" src="⭐ Desafío Tarjeta de personaje con CSS (20 mar 2025 a la(s) 23_37).jpg" alt="foto1" data-index="1">
+    <img class="galeria-item galeria-item-2" src="java.png" alt="foto2" data-index="2">
+    <img class="galeria-item galeria-item-3" src="landing page.png" alt="foto3" data-index="3">
+    <img class="galeria-item galeria-item-4" src="ojopagina.png" alt="foto4" data-index="4">
+    <img class="galeria-item galeria-item-5" src="pagina aerografia.png" alt="foto5" data-index="5">
+  </div>
+<div class="galeria-conteiner">
+  <!-- tus imágenes acá -->
+
+  <div class="galeria-controles">
+    <button class="galeria-controles-previo">Anterior</button>
+
+    <div class="btn-container">
+      <button id="addProjectBtn" class="btn">+</button>
+      <span class="tooltip">Añadir proyecto</span>
+    </div>
+
+    <button class="galeria-controles-siguiente">Siguiente</button>
+  </div>
+</div>
+</div>
+
+<!-- Modal Añadir Proyecto -->
+<div id="modalAnadirProyecto" class="modal">
+  <div class="modal-content">
+    <span class="close-proyecto">&times;</span>
+    <h2>Añadir proyecto</h2>
+    <form>
+      <label for="titulo">Título del proyecto</label>
+      <input type="text" id="titulo" name="titulo" placeholder="Ej: Mi Portfolio" required>
+
+      <label for="descripcion">Tecnologías y descripcion</label>
+      <textarea id="descripcion" name="descripcion" placeholder="Cuales uso principalmente, como html y css" rows="4" required></textarea>
+
+      <label for="imagen">URL </label>
+      <input type="url" id="imagen" name="imagen" placeholder="ej: https://misitio.com/imagen.jpg" required>
+
+      <button type="submit" class="btn-modal">Añadir</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* header */
+header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body
+{
+  background-color: #0d0d0d;
+}
+
+/* Botón arriba a la derecha */
+.boton-cuenta {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: #e63946;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 3;
+}
+.boton-cuenta:hover {
+  background: #ff4757;
+}
+
+/* Bloques negros */
+.bloque-negro {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(#f2f2f2, #0d0d0d);
+  color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Nombre y apellido grandes */
+.nombre{
+  font-size: 6vw;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.apellido{
+  font-size: 6vw;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  position: relative;
+  right:6.8%;
+}
+
+/* Card con foto circular */
+.card {
+  width: 200px;
+  height: 200px;
+
+  position: absolute;
+  top: 0.5%; /* se superpone entre los bloques */
+  left: 60px; /* a la izquierda */
+  z-index: 2;
+  border-radius: 50%; /* circular */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(56, 50, 50, 0.5);
+}
+
+.card img {
+  width: 90%;   /* un poco más chica para dejar espacio al borde */
+  height: 90%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* El efecto animado alrededor (adaptado a círculo) */
+.card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    red,
+    blue,
+    purple,
+    cyan,
+    red
+  );
+  animation: spin 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 8px; /* deja un margen para que se vea el borde */
+  border-radius: 50%;
+  background: #07182E; /* mismo color que tu card */
+  z-index: 1;
+}
+
+.btn-cont {
+  position: relative;
+  left: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: #1e1e1e;
+  margin: 0;
+  border: 1px solid #ffff;
+  border-radius: 10px;
+}
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+.button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  background-color: #000; /* mantiene sólido, nada de transparente */
+}
+.settings-btn {
+  display: block;
+  transition: transform 0.4s ease-in;
+}
+.settings-btn:hover {
+  transform: rotate(60deg);
+}
+.settings-btn:active {
+  animation: rot 1s linear infinite;
+}
+@keyframes rot {
+  from {
+    transform: rotate(-100deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+.tooltip {
+  visibility: hidden;
+  width: 140px; /* un poquito más ancho */
+  background-color: #000; /* fondo negro sólido */
+  color: #fff; /* letras blancas */
+  text-align: center;
+  border-radius: 5px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4); /* un poco de sombra para destacarlo */
+}
+
+
+/*header*/
+
+
+/*RESTO DE PAGINA*/
+
+.sobre-mi {
+  position: relative;
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Letras blancas */
+  padding: 20px 20px;
+  overflow: hidden; /* Para que las líneas no se salgan */
+}
+
+.sobre-mi h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+
+/* --- Líneas decorativas animadas --- */
+.sobre-mi::before,
+.sobre-mi::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 110%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  animation: mover 10s linear infinite;
+  z-index: 0;
+}
+
+.sobre-mi::after {
+  animation-direction: reverse;
+}
+
+@keyframes mover {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50px, -50px);
+  }
+}
+
+/* Para que el texto quede arriba de las líneas */
+.sobre-mi h2,
+.sobre-mi p {
+  position: relative;
+  z-index: 1;
+}
+
+.sobre-mi-texto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  background-color: #111; /* fondo gris oscuro para contrastar */
+}
+
+.sobre-mi-item {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sobre-mi-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.sobre-mi-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #e63946; /* rojo llamativo para títulos */
+}
+
+.sobre-mi-item p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.sobre-mi-item span {
+  color: #4da6ff; /* azul para destacar palabras clave */
+  font-weight: bold;
+}
+
+/* Galería de imágenes */
+.galeria
+{
+  width: 100%;
+}
+
+.galeria-conteiner
+{
+  align-items: center;
+  display: flex;
+  height: 400px;
+  margin: 0 auto;
+  max-width: 1000px;
+  position: relative;
+}
+
+.galeria-item
+{
+  height: 200px;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  width: 330px;
+  z-index: 0;
+  border: 15px;
+  background-size: contain;  
+}
+
+.galeria-item-1
+{
+  left: 15%;
+  opacity: .4;
+  transform: translate(-50%);
+}
+
+.galeria-item-2, .galeria-item-4
+{
+  height: 250px;
+  opacity: 0.8;
+  width: 380px;
+  z-index: 1;
+}
+
+.galeria-item-2
+{
+  left: 30%;
+  transform: translateX(-50%);
+}
+
+.galeria-item-3
+{
+box-shadow: -2px 5px 33px 6px rgb(0,0,0,0.35);
+height: 300px;
+opacity: 1;
+left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 430px;
+}
+
+.galeria-item-4
+{
+  left: 70%;
+  transform: translateX(-50%);
+}
+
+.galeria-item-5
+{
+  left: 85%;
+  opacity: .4;
+  transform: translateX(-50%);
+}
+
+.galeria-controles {
+  position: absolute;
+  bottom: 350px;   /* abajo de la galería */
+  left: 64%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;  /* espacio entre los tres botones */
+}
+
+/* Modal base */
+/* ----- Modal Cambiar Cuenta ----- */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #111;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  color: #fff;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+  text-align: center;
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  text-align: left;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.btn-modal {
+  background: #e63946;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-modal:hover {
+  background: #ff4757;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+.galeria-controles-button:focus
+{
+  outline: none;
+}
+
+.galeria-controles-previo
+{
+  position: relative;
+}
+
+
+.galeria-controles-previo:hover::before
+{
+  left: -40px;
+}
+
+.galeria-controles-siguiente
+{
+  position: relative;
+}
+
+
+
+.galeria-controles-siguiente:hover::before
+{
+  right: -40px;
+}
+
+.galeria-nav
+{
+  bottom: -15px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.galeria-nav li
+{
+  background-color: #ccc;
+  border-radius: 50%;
+  height: 10px;
+  margin: 0 16px;
+  width: 10px;
+}
+
+.galeria-nav li.galeria-item-seleccionado
+{
+  background-color: #555;
+}
+
+.galeria-controles button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 24px; /* un poco más grande */
+  margin: 0 30px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif; /* tu fuente importada en el HTML */
+  color: #fff;
+  font-weight: 600;
+}
+
+.galeria-controles button:hover {
+  color: #e63946;
+}
+
+.btn-container {
+  position: relative;
+  display: inline-block;
+}
+
+.btn {
+  position: relative;
+  font-size: 28px;
+  text-transform: uppercase;
+  padding: 1em 2.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+  background-color: black;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+/* Tooltip */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%; /* arriba del botón */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s;
+  font-size: 14px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* flechita */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.btn-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+/* Fin Galería de imágenes */
+
+
