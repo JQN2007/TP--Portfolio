@@ -14,5 +14,3 @@ module.exports = {
     res.send(`Usuario registrado: ${name} - ${email}`);
   }
 };
-
-

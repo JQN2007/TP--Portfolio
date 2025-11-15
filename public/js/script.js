@@ -101,3 +101,49 @@ function initInfiniteCarousel() {
 
 // Inicializar cuando la página cargue
 document.addEventListener('DOMContentLoaded', initInfiniteCarousel);
+
+
+// --- Modal ---
+const modal = document.getElementById('projectModal');
+const openBtn = document.getElementById('addProjectBtn');
+const closeBtn = document.querySelector('.close');
+
+if (openBtn && modal && closeBtn) {
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+}
+
+// --- Enviar formulario ---
+const projectForm = document.getElementById('projectForm');
+
+if (projectForm) {
+  projectForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(projectForm);
+
+    const response = await fetch('/portfolio/add', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      alert('Proyecto agregado con éxito');
+      modal.style.display = 'none';
+      projectForm.reset();
+      location.reload();
+    } else {
+      alert('Error al agregar el proyecto');
+    }
+  });
+}

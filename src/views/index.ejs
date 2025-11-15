@@ -1,18 +1,5 @@
-<!DOCTYPE html> 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Henny+Penny&family=My+Soul&family=Oswald:wght@200..700&family=Pacifico&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&display=swap" rel="stylesheet">
-
-    <title>PortFolio</title>
-
-    <link rel="stylesheet" href="/css/index.css">
-</head>
-<body>
+<%- include('./partials/header') %>
+<main>
     <header>
     <div class="bloque-negro">
       <h1 class="nombre">Joaquin</h1>
@@ -99,10 +86,33 @@
   <div class="galeria-controles">
     <button class="galeria-controles-previo">Anterior</button>
 
-    <div class="btn-container">
-      <button id="addProjectBtn" class="btn">+</button>
-      <span class="tooltip">Añadir proyecto</span>
-    </div>
+    <!-- Botón para abrir el modal -->
+<div class="btn-container">
+  <button id="addProjectBtn" class="btn">+</button>
+  <span class="tooltip">Añadir proyecto</span>
+</div>
+
+<!-- Modal -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Añadir nuevo proyecto</h2>
+
+    <form id="projectForm" enctype="multipart/form-data">
+      <label for="projectName">Nombre del proyecto:</label>
+      <input type="text" id="projectName" name="projectName" required>
+
+      <label for="projectImage">Imagen:</label>
+      <input type="file" id="projectImage" name="projectImage" accept="image/*">
+
+      <label for="projectFile">Archivo del proyecto:</label>
+      <input type="file" id="projectFile" name="projectFile">
+
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+</div>
+
 
     <button class="galeria-controles-siguiente">Siguiente</button>
   </div>
@@ -111,6 +121,8 @@
 
 
 <script src="/js/script.js"></script>
+<script src="/js/modal.js"></script>
 
-</body>
-</html>
+
+</main>
+<%- include('./partials/footer') %>

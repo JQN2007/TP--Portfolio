@@ -1,5 +1,11 @@
 module.exports = {
-  home: (req, res) => {
-    res.render('index', { title: 'Inicio' });
-  }
+
+    index: (req, res) => {
+        res.render('index', { title: 'Inicio' });
+    },
+
+    home: (req, res) => {
+        res.render('index', { title: 'Home' });
+    }
+
 };

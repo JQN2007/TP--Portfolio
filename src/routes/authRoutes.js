@@ -11,5 +11,3 @@ router.post('/login', authController.loginProcess);
 router.post('/register', authController.registerProcess);
 
 module.exports = router;
-
-
