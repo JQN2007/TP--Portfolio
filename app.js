@@ -1,39 +1,60 @@
+// =====================
+//    IMPORTACIONES
+// =====================
 const express = require('express');
-const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
+const session = require('express-session');
+require('dotenv').config();
 
+// =====================
+//      APP
+// =====================
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// =====================
+//   MIDDLEWARES
+// =====================
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
-/* Middlewares */
-app.use(methodOverride('_method'))
-app.use(express.static('public')); // sirve archivos html, css, js
+app.use(session({
+    secret: 'superSecret123',
+    resave: false,
+    saveUninitialized: false
+}));
 
+// Archivos públicos (CSS / JS / imágenes)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Motor de vistas
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname ,'./src/views'));
-app.use(express.urlencoded({ extended: true })); // para leer formularios
-app.use(express.json()); // para leer JSON
+app.set('views', path.join(__dirname,'src', 'views'));
 
-/* importo las rutas */
-const mainRoutes = require('./src/routes/mainRoutes.js');
-const authRoutes = require('./src/routes/authRoutes.js');
-const projectRoutes = require('./src/routes/projectRoutes.js');
+// =====================
+//         RUTAS
+// =====================
+app.use('/', require('./src/routes/mainRoutes'));
+app.use('/auth', require('./src/routes/authRoutes'));
+app.use('/profile', require('./src/routes/profileRoutes'));
+app.use('/projects', require('./src/routes/projectRoutes'));
+app.use('/admin', require('./src/routes/adminRoutes'));
 
-require('dotenv').config();
-/* Leemos la constante*/
-const PORT = process.env.PORT;
 
-/* uso los archivos de rutas */
-app.use('/', mainRoutes);
-app.use('/auth', authRoutes);
-app.use('/portfolio', projectRoutes);
 
-// Middleware para manejar el error 404
+// =====================
+//     ERROR 404
+// =====================
 app.use((req, res, next) => {
-res.status(404).send('Recurso no encontrado');
+    res.status(404).send('Recurso no encontrado');
 });
 
+app.use('/uploads', express.static('uploads'));
 
 
+// =====================
+//   INICIAR SERVIDOR
+// =====================
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
