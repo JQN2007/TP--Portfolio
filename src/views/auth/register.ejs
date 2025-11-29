@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+<div class="sobre-mi">
+    
+</div>
+<form class="form" action="/auth/register" method="POST">
+    <p class="title">Registrarse </p>
+    <p class="message">Registrate ahora para poder tener acceso a varias funciones </p>
+
+    <div class="flex">
+        <label>
+    <input class="input" type="text" name="first_name" required>
+    <span>Primer Nombre</span>
+</label>
+
+<label>
+    <input class="input" type="text" name="last_name" required>
+    <span>Apellido</span>
+</label>
+    </div>  
+            
+    <label>
+    <input class="input" type="email" name="email" required>
+    <span>Email</span>
+</label>
+
+<label>
+    <input class="input" type="password" name="password" required>
+    <span>Contraseña</span>
+</label>
+
+<label>
+    <input class="input" type="password" name="confirmPassword" required>
+    <span>Confirmar Contraseña</span>
+</label>
+
+    <button class="submit" type="submit">Registrarse</button>
+
+    <p class="signin">Ya tienes una cuenta? <a href="/auth/login">Iniciar sesión</a></p>
+</form>
+
+<a href="/" class="inicio" ><h2>Volver al Inicio</h2></a>
+<br>
+<br>
+<div class="sobre-mi"></div>
+</body>
+</html>

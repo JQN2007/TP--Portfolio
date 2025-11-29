@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<main style="padding: 30px; color:white">
+
+<h1>Añadir Proyecto</h1>
+
+<form action="/projects/add" method="POST" enctype="multipart/form-data">
+
+    <label>Título del proyecto:</label>
+    <input type="text" name="title" required>
+
+    <label>Imagen del proyecto:</label>
+    <input type="file" name="image" accept="image/*">
+
+    <label>Archivo del proyecto (opcional):</label>
+    <input type="file" name="file">
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+</main>
+
+<%- include('../partials/footer') %>
