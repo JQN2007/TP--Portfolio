@@ -1,39 +1,43 @@
-const db = require("../database/db");
+// src/controllers/userController.js
+const db = require('../config/db');
 
-// Cambiar la foto del usuario
-exports.updatePhoto = (req, res) => {
-    const userId = req.session.user.id;
-    const filename = req.file?.filename;
+exports.updatePhoto = async (req, res) => {
+    try {
+        if (!req.session.user) return res.status(401).send("No autorizado");
 
-    if (!filename) return res.redirect("/");
+        if (!req.file) return res.redirect('/'); // si no sube archivo, volver
 
-    db.query(
-        "UPDATE users SET profile_image = ? WHERE id = ?",
-        [filename, userId],
-        () => res.redirect("/")
-    );
+        const filename = req.file.filename;
+        const userId = req.session.user.id;
+
+        await db.query("UPDATE users SET profile_image = ? WHERE id = ?", [filename, userId]);
+
+        // actualizar sesión
+        req.session.user.profile_image = filename;
+        req.session.save(() => res.redirect('/'));
+    } catch (error) {
+        console.error("Error updatePhoto:", error);
+        res.status(500).send("Error subiendo la foto");
+    }
 };
 
-// Agregar tarjeta
-exports.addCard = (req, res) => {
-    const { title, desc } = req.body;
-    const userId = req.session.user.id;
+exports.saveCards = async (req, res) => {
+    try {
+        if (!req.session.user) return res.status(401).json({ success: false, message: "No autorizado" });
 
-    db.query(
-        "INSERT INTO user_cards (user_id, title, description) VALUES (?, ?, ?)",
-        [userId, title, desc],
-        (err) => {
-            if (err) return res.json({ success: false });
-            res.json({ success: true });
-        }
-    );
-};
+        const cards = req.body.cards; // espera array de tarjetas [{title, description}, ...]
+        const userId = req.session.user.id;
 
-// Cargar tarjetas al index
-exports.getUserCards = (userId, callback) => {
-    db.query(
-        "SELECT * FROM user_cards WHERE user_id = ?",
-        [userId],
-        (err, rows) => callback(rows)
-    );
+        // Guardar JSON (stringify)
+        const cardsJson = JSON.stringify(cards || []);
+        await db.query("UPDATE users SET cards_json = ? WHERE id = ?", [cardsJson, userId]);
+
+        // Opcional: actualizar sesión con cards
+        req.session.user.cards_json = cardsJson;
+
+        res.json({ success: true, cards });
+    } catch (error) {
+        console.error("Error saveCards:", error);
+        res.status(500).json({ success: false, message: "Error guardando tarjetas" });
+    }
 };

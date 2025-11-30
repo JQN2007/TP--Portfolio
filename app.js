@@ -41,6 +41,8 @@ app.use('/auth', require('./src/routes/authRoutes'));
 app.use('/profile', require('./src/routes/profileRoutes'));
 app.use('/projects', require('./src/routes/projectRoutes'));
 app.use('/admin', require('./src/routes/adminRoutes'));
+// después de las otras app.use(...)
+app.use('/user', require('./src/routes/userRoutes'));
 
 
 

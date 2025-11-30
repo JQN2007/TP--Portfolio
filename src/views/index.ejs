@@ -1,36 +1,44 @@
 <%- include('./partials/header') %>
 <main>
     <header>
-    <div class="bloque-negro">
-      <h1 class="nombre">
-        <% if (user) { %>
-          <%= user.name %>
-        <% } else { %>
-          Joaquin
-        <% } %>
-      </h1>
-    </div>
-
-    <div class="card">
-  <% if (user && user.profile_image) { %>
-
-    <img src="/uploads/<%= user.profile_image %>" width="120">
-<% }
- else { %>
-          <img src="/images/logo imagen.jpg" alt="Foto perfil">
+  <div class="bloque-negro">
+    <h1 class="nombre">
+      <% if (user) { %>
+        <%= user.name %>
+      <% } else { %>
+        Joaquin
       <% } %>
-    </div>
+    </h1>
+  </div>
 
-    <div class="bloque-negro">
-      <h1 class="apellido">
-        <% if (user) { %>
-          <%= user.lastname %>
-        <% } else { %>
-          Jara
-        <% } %>
-      </h1>
+  <!-- FOTO DE PERFIL -->
+  <div class="card">
+    <% if (user && user.profile_image) { %>
+      <img src="/uploads/<%= user.profile_image %>" width="120" alt="Foto perfil">
+    <% } else { %>
+      <img src="/images/logo imagen.jpg" alt="Foto perfil">
+    <% } %>
+  </div>
 
-      <div class="btn-cont">
+  <!-- BOTÓN: CAMBIAR FOTO -->
+  <% if (user) { %>
+    <button id="changePhotoBtn" class="profile-action-button" style="top:110px; left:270px;">
+      Cambiar foto
+    </button>
+  <% } %>
+
+  <div class="bloque-negro">
+    <h1 class="apellido">
+      <% if (user) { %>
+        <%= user.lastname %>
+      <% } else { %>
+        Jara
+      <% } %>
+    </h1>
+
+    <!-- BOTÓN: CAMBIAR CUENTA ORIGINAL (NO TOCO TU CÓDIGO) -->
+     <div class="lugar">
+     <div class="btn-cont">
         <a href="/auth/login">
             <button class="button">
                 <svg
@@ -46,44 +54,49 @@
             </button>  
         </a>
       </div>
+</div>
+  </div>
 
-    </div>
-  </header>
+  <!-- BOTÓN: EDITAR TARJETAS -->
+  <% if (user) { %>
+    <button id="editCardsBtn" class="profile-action-button" style="top:155px; left:270px;">
+      Editar tarjetas
+    </button>
+  <% } %>
+
+</header>
+
 
 <section class="sobre-mi">
   <h2>SOBRE MI</h2>
 </section>
 
 <section class="sobre-mi-texto">
-  <div class="sobre-mi-item">
-    <h3>💻 Desarrollador Web</h3>
-    <p>
-      Soy un <span>desarrollador web</span> con experiencia en crear sitios y aplicaciones interactivas.
-    </p>
-  </div>
-
-  <div class="sobre-mi-item">
-    <h3>🚀 Apasionado por aprender</h3>
-    <p>
-      Me encanta <span>aprender nuevas tecnologías</span> y mejorar mis habilidades día a día.
-    </p>
-  </div>
-
-  <div class="sobre-mi-item">
-    <h3>🎨 Creatividad y resolución</h3>
-    <p>
-      Disfruto trabajar en <span>proyectos desafiantes</span> que ponen a prueba mi creatividad y mi capacidad de resolver problemas.
-    </p>
-  </div>
-
-  <div class="sobre-mi-item">
-    <h3>🌎 Mi objetivo</h3>
-    <p>
-      Crecer como profesional y formar parte de <span>grandes proyectos</span> que me permitan aportar valor e innovar.
-    </p>
-  </div>
+  <% if (!user) { %>
+    <!-- Tus textos originales cuando NO hay usuario -->
+    <div class="sobre-mi-item">
+      <h3>💻 Desarrollador Web</h3>
+      <p> Soy un <span>desarrollador web</span> ...</p>
+    </div>
+    <!-- (otros fijos aquí) -->
+  <% } else { %>
+    <!-- Si hay user → mostramos tarjetas dinámicas (pueden estar vacías) -->
+    <div id="userCardsContainer">
+      <% if (cards && cards.length > 0) { %>
+        <% cards.forEach((card) => { %>
+            <div class="sobre-mi-item">
+                <h3><%= card.title %></h3>
+                <p><%= card.description %></p>
+            </div>
+        <% }) %>
+      <% } else { %>
+        <p style="color: #ddd; text-align:center;">Aún no agregaste tarjetas. Usá "Editar tarjetas" para crear las tuyas.</p>
+      <% } %>
+    </div>
+  <% } %>
 </section>
 
+<!-- PROYECTOS: ya config. si user → vacío, si no → tus imágenes originales -->
 <section class="sobre-mi">
   <h2>MIS PROYECTOS</h2>
 </section>
@@ -92,57 +105,76 @@
   <div class="galeria-conteiner">
 
     <% if (!user) { %>
-      <!-- SI NO HAY USUARIO → TUS PROYECTOS ORIGINALES -->
-      <img class="galeria-item galeria-item-1" src="/images/⭐ Desafío Tarjeta de personaje con CSS (20 mar 2025 a la(s) 23_37).jpg" alt="foto1" data-index="1">
-      <img class="galeria-item galeria-item-2" src="/images/java.png" alt="foto2" data-index="2">
-      <img class="galeria-item galeria-item-3" src="/images/landing page.png" alt="foto3" data-index="3">
-      <img class="galeria-item galeria-item-4" src="/images/ojopagina.png" alt="foto4" data-index="4">
-      <img class="galeria-item galeria-item-5" src="/images/pagina aerografia.png" alt="foto5" data-index="5">
+
+      <!-- Si NO hay usuario → mostrar tus imágenes originales -->
+      <img class="galeria-item galeria-item-1" src="/images/⭐ Desafío Tarjeta de personaje con CSS (20 mar 2025 a la(s) 23_37).jpg" data-index="1">
+      <img class="galeria-item galeria-item-2" src="/images/java.png" data-index="2">
+      <img class="galeria-item galeria-item-3" src="/images/landing page.png" data-index="3">
+      <img class="galeria-item galeria-item-4" src="/images/ojopagina.png" data-index="4">
+      <img class="galeria-item galeria-item-5" src="/images/pagina aerografia.png" data-index="5">
+
     <% } else { %>
-      <!-- SI HAY USUARIO LOGUEADO → QUE NO HAYA NINGÚN PROYECTO -->
-      <!-- Se deja vacío a propósito -->
+
+      <!-- Si hay usuario logueado → NO mostrar imágenes -->
+      <!-- Queda vacío a propósito -->
+
     <% } %>
 
   </div>
 
   <div class="galeria-conteiner">
     <div class="galeria-controles">
+
+      <!-- Botón Anterior -->
       <button class="galeria-controles-previo">Anterior</button>
 
-      <!-- Botón para añadir proyecto -->
+      <!-- Botón Añadir proyecto (solo botón, SIN modal) -->
       <div class="btn-container">
         <button id="addProjectBtn" class="btn">+</button>
         <span class="tooltip">Añadir proyecto</span>
       </div>
 
-      <!-- Modal para cargar proyecto -->
-      <div id="projectModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Añadir nuevo proyecto</h2>
-
-          <form id="projectForm" enctype="multipart/form-data">
-            <label for="projectName">Nombre del proyecto:</label>
-            <input type="text" id="projectName" name="projectName" required>
-
-            <label for="projectImage">Imagen:</label>
-            <input type="file" id="projectImage" name="projectImage" accept="image/*">
-
-            <label for="projectFile">Archivo del proyecto:</label>
-            <input type="file" id="projectFile" name="projectFile">
-
-            <button type="submit">Guardar</button>
-          </form>
-        </div>
-      </div>
-
+      <!-- Botón Siguiente -->
       <button class="galeria-controles-siguiente">Siguiente</button>
+
     </div>
   </div>
 </div>
 
 
+<!-- =========== MODALES =========== -->
+
+<!-- Modal Cambiar Foto -->
+<div id="photoModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Cambiar foto de perfil</h2>
+    <form id="photoForm" action="/user/update-photo" method="POST" enctype="multipart/form-data">
+      <input type="file" name="newPhoto" accept="image/*" required>
+      <button type="submit">Subir</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Editar Tarjetas -->
+<div id="cardModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Editar tarjetas</h2>
+
+    <div id="cardsEditor">
+      <!-- dinámico: aquí se listan inputs para editar/crear -->
+    </div>
+
+    <button id="addCardBtn">Añadir tarjeta</button>
+    <button id="saveCardsBtn">Guardar tarjetas</button>
+  </div>
+</div>
+
 <script src="/js/script.js"></script>
 <script src="/js/modal.js"></script>
+<script src="/js/changePhoto.js"></script>
+<script src="/js/cards.js"></script>
+
 </main>
 <%- include('./partials/footer') %>
